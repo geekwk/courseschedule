@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ahpu.mapper.ClassroomMapper">
+    <insert id="addClassroom">
+        insert into classroom values (null,#{classroomName},#{classroomInfo},#{classroomNumber});
+    </insert>
+
+    <select id="getAllClassroom" resultType="cn.ahpu.pojo.Classroom">
+        select * from classroom;
+    </select>
+    <select id="getClassroomByClassroom" resultType="cn.ahpu.pojo.Classroom">
+        select * from classroom where classroom=#{classroom};
+    </select>
+    <select id="getClassroomById" resultType="cn.ahpu.pojo.Classroom">
+        select * from classroom where id = #{id};
+    </select>
+</mapper>
