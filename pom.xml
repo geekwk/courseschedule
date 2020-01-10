@@ -9,27 +9,22 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>CourseSchedule Maven Webapp</name>
+  <name>CourseSchedule</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <spring.version>5.1.5.RELEASE</spring.version>
     <jackson.version>2.9.3</jackson.version>
+<!--    <sonar.inclusions>src/main/java/**</sonar.inclusions>-->
+<!--    <sonar.inclusions>src/main/webapp/jsp/**</sonar.inclusions>-->
+<!--    <sonar.exclusions>src/main/webapp/static/**</sonar.exclusions>-->
   </properties>
 
   <dependencies>
-
-
-    <!-- https://mvnrepository.com/artifact/org.apache.maven/maven-ant-tasks -->
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-ant-tasks</artifactId>
-      <version>2.1.3</version>
-    </dependency>
 
     <!--Junit jar包-->
     <dependency>
@@ -277,10 +272,21 @@
       <version>8.0.1</version>
       <scope>provided</scope>
     </dependency>
-
-
-
   </dependencies>
+  <profiles>
+    <profile>
+      <id>sonar</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <sonar.host.url>http://www.wangkang.ink:9000</sonar.host.url>
+        <sonar.username>admin</sonar.username>
+        <sonar.password>admin</sonar.password>
+        <sonar.exclusions>src/main/webapp/static/**</sonar.exclusions>
+      </properties>
+    </profile>
+  </profiles>
 
   <build>
     <finalName>CourseSchedule</finalName>
@@ -325,5 +331,27 @@
         </plugin>
       </plugins>
     </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.6.0.1398</version>
+      </plugin>
+      <!-- test case runner begin -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.7.7.201606060606</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- test case runner end -->
+    </plugins>
   </build>
 </project>
