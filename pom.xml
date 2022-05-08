@@ -17,7 +17,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <spring.version>5.1.5.RELEASE</spring.version>
+    <spring.version>5.3.18</spring.version>
     <jackson.version>2.12.1</jackson.version>
 <!--    <sonar.inclusions>src/main/java/**</sonar.inclusions>-->
 <!--    <sonar.inclusions>src/main/webapp/jsp/**</sonar.inclusions>-->
@@ -30,14 +30,14 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.13.1</version>
+      <version>4.11</version>
     </dependency>
 
     <!--mysql数据库驱动 -->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.16</version>
+      <version>5.1.47</version>
     </dependency>
 
     <dependency>
@@ -74,7 +74,7 @@
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
-      <version>3.5.6</version>
+      <version>3.4.1</version>
     </dependency>
     <!-- spring配置 -->
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
