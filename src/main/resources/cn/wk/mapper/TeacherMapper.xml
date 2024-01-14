@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wk.mapper.TeacherMapper">
+    
+    <resultMap id="TeacherMapCascadeAcademy" type="cn.wk.pojo.Teacher">
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="name" column="name"></result>
+        <result property="phone" column="phone"></result>
+        <result property="address" column="address"></result>
+        <association property="academy" select="cn.wk.mapper.AcademyMapper.getAcademyById" column="academy">
+
+        </association>
+    </resultMap>
+
+    <select id="loginCheck" resultType="cn.wk.pojo.Teacher">
+        select * from teacher
+        where username = #{username} and password = #{password};
+    </select>
+
+    <select id="getAllTeacherOfCourseById" resultType="cn.wk.pojo.Teacher">
+        select teacher.* from teacher,course_teacher
+        where course_teacher.course = #{id} and course_teacher.teacher = teacher.id;
+    </select>
+
+    <insert id="addTeacher" parameterType="cn.wk.pojo.Teacher">
+        insert into  teacher values (null,#{teacher.username},#{teacher.password},#{teacher.name},#{teacher.academy.id},#{teacher.phone},#{teacher.address});
+    </insert>
+
+    <select id="getTeacherListOfCourse" resultMap="TeacherMapCascadeAcademy">
+        select teacher.* from  teacher,course_teacher
+        where course_teacher.course = #{id} and course_teacher.teacher = teacher.id
+    </select>
+
+    <select id="getTeacherListOfAcademy" resultType="cn.wk.pojo.Teacher">
+        select teacher.* from teacher,academy
+        where teacher.academy = academy.id and academy.name = #{academyName};
+    </select>
+
+    <insert id="addTeacherOfCourse">
+        insert into course_teacher values (null,#{courseId},#{teacherId});
+    </insert>
+
+    <select id="getTeacherIdByUserName" resultType="Integer">
+        select id from teacher where username = #{teacherUserName};
+    </select>
+
+    <select id="getTeacherById" resultMap="TeacherMapCascadeAcademy">
+        select * from teacher where id = #{id};
+    </select>
+    <select id="getCountOfTeacher" resultType="java.lang.Integer">
+        select count(id) from teacher;
+    </select>
+    <select id="getAllTeacherOfAcademyById" resultMap="TeacherMapCascadeAcademy">
+        select * from teacher where academy = #{academyId};
+    </select>
+    <select id="getIdAutoIncrement" resultType="Integer">
+        select auto_increment from information_schema.tables where table_name = 'teacher';
+    </select>
+
+    <update id="updateTeacherInfo" parameterType="cn.wk.pojo.Teacher">
+        update teacher set phone = #{teacher.phone} , address = #{teacher.address} , name = #{teacher.name} where id = #{teacher.id};
+    </update>
+    <update id="updatePassword">
+        update teacher set password = #{newpassword} where id = #{id};
+    </update>
+
+</mapper>
