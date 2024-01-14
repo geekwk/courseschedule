@@ -2,7 +2,7 @@ package cn.ahpu.util;
 
 import cn.ahpu.mapper.*;
 import cn.ahpu.pojo.*;
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson2.JSONArray;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
