@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wk.mapper.CourseMapper">
+    
+    <resultMap id="CourseCascadeMap" type="cn.wk.pojo.Course">
+        <result property="id" column="id"></result>
+        <result property="name" column="name"></result>
+        <result property="info" column="info"></result>
+        <result property="credit" column="credit"></result>
+        <result property="period" column="period"></result>
+        <association property="academy" select="cn.wk.mapper.AcademyMapper.getAcademyById" column="academy">
+        </association>
+        <association property="teacherList" select="cn.wk.mapper.TeacherMapper.getAllTeacherOfCourseById" column="id">
+        </association>
+    </resultMap>
+    <update id="updateCourse">
+        update course
+        set
+        course.name = #{course.name},
+        credit =#{course.credit},
+        period = #{course.period},
+        academy = #{course.academy.id},
+        info = #{course.info}
+        where id = #{course.id};
+    </update>
+    <delete id="deleteCourse">
+        delete from course
+        where
+        id = #{id};
+    </delete>
+
+    <select id="getAllCoursesCascade" resultMap="CourseCascadeMap">
+        select * from course;
+    </select>
+
+    <select id="getCourseById" resultMap="CourseCascadeMap">
+        select * from  course
+        where id = #{id};
+    </select>
+    
+    <insert id="addCourse" parameterType="cn.wk.pojo.Course">
+        insert into course values (null,#{course.name},#{course.credit},#{course.period},#{course.academy.id},#{course.info});
+    </insert>
+
+    <select id="getIdByCourseName" resultType="Integer">
+        select id from course
+        where name = #{name};
+    </select>
+
+    <select id="getAllCourseName" resultType="String">
+        select name from course;
+    </select>
+
+</mapper>

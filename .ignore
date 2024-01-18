@@ -9,3 +9,6 @@ target/
 # 2. IDE
 ### IntelliJ IDEA ###
 .idea
+
+#3 log
+.log
